@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Language Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Multi-Language Quiz</h1>
+            <p>Test your knowledge across 9 different languages</p>
+            <div class="header-buttons">
+                <button id="home-btn" class="home-btn" title="Return to home screen">🏠 Home</button>
+                <button id="autoplay-btn" class="autoplay-btn" title="Toggle auto-play pronunciation">
+                    🔊 Auto-Play: OFF
+                </button>
+                <button id="history-btn" class="history-btn">📚 Review History</button>
+            </div>
+        </header>
+        
+        <div id="quiz-container">
+            <div id="start-screen" class="screen active">
+                <h2>Welcome to Multi-Language Quiz!</h2>
+                <p>Test your language knowledge with customizable quiz settings</p>
+                
+                <div class="language-settings">
+                    <div class="language-selector">
+                        <label for="quiz-language">Quiz Language (Questions will be in):</label>
+                        <select id="quiz-language" class="language-select">
+                            <option value="zh" selected>🇨🇳 Chinese (中文)</option>
+                            <option value="ko">🇰🇷 Korean (한국어)</option>
+                            <option value="en">🇺🇸 English</option>
+                            <option value="ja">🇯🇵 Japanese (日本語)</option>
+                            <option value="es">🇪🇸 Spanish (Español)</option>
+                            <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
+                            <option value="fr">🇫🇷 French (Français)</option>
+                            <option value="de">🇩🇪 German (Deutsch)</option>
+                            <option value="tr">🇹🇷 Turkish (Türkçe)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <label for="answer-language">Answer Language (Options will be in):</label>
+                        <select id="answer-language" class="language-select">
+                            <option value="en" selected>🇺🇸 English</option>
+                            <option value="zh">🇨🇳 Chinese (中文)</option>
+                            <option value="ko">🇰🇷 Korean (한국어)</option>
+                            <option value="ja">🇯🇵 Japanese (日本語)</option>
+                            <option value="es">🇪🇸 Spanish (Español)</option>
+                            <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
+                            <option value="fr">🇫🇷 French (Français)</option>
+                            <option value="de">🇩🇪 German (Deutsch)</option>
+                            <option value="tr">🇹🇷 Turkish (Türkçe)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <label for="difficulty-level">Difficulty Level:</label>
+                        <select id="difficulty-level" class="language-select">
+                            <option value="beginner" selected>🟢 Beginner - Basic words & phrases</option>
+                            <option value="intermediate">🟡 Intermediate - Common vocabulary</option>
+                            <option value="advanced">🔴 Advanced - Complex words & expressions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <label for="question-count">Number of Questions:</label>
+                        <select id="question-count" class="language-select">
+                            <option value="5">5 Questions</option>
+                            <option value="10" selected>10 Questions</option>
+                            <option value="15">15 Questions</option>
+                            <option value="20">20 Questions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <label for="time-limit">Time Limit:</label>
+                        <select id="time-limit" class="language-select">
+                            <option value="0" selected>⏱️ No Time Limit</option>
+                            <option value="30">⏱️ 30 seconds per question</option>
+                            <option value="60">⏱️ 1 minute per question</option>
+                            <option value="120">⏱️ 2 minutes per question</option>
+                        </select>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <label for="question-type">Question Type:</label>
+                        <select id="question-type" class="language-select">
+                            <option value="mixed" selected>🎲 Mixed - All question types</option>
+                            <option value="multiple-choice">📝 Multiple Choice</option>
+                            <option value="fill-blank">✏️ Fill in the Blank</option>
+                            <option value="audio-only">🎵 Audio Only</option>
+                            <option value="reverse">🔄 Reverse Translation</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="start-btn" class="btn primary">Start Quiz</button>
+            </div>
+            
+            <div id="quiz-screen" class="screen">
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill"></div>
+                </div>
+                <div class="question-counter">
+                    <span id="current-question">1</span> / <span id="total-questions">10</span>
+                    <div id="timer-display" class="timer-display hidden">
+                        <span id="timer-text">⏱️ 00:30</span>
+                    </div>
+                </div>
+                
+                <div class="in-quiz-language-switcher">
+                    <div class="language-switch-container">
+                        <label for="quiz-language-switch">Question Language:</label>
+                        <select id="quiz-language-switch" class="language-switch-select">
+                            <option value="zh">🇨🇳 Chinese</option>
+                            <option value="ko">🇰🇷 Korean</option>
+                            <option value="en">🇺🇸 English</option>
+                            <option value="ja">🇯🇵 Japanese</option>
+                            <option value="es">🇪🇸 Spanish</option>
+                            <option value="vi">🇻🇳 Vietnamese</option>
+                            <option value="fr">🇫🇷 French</option>
+                            <option value="de">🇩🇪 German</option>
+                            <option value="tr">🇹🇷 Turkish</option>
+                        </select>
+                    </div>
+                    <div class="language-switch-container">
+                        <label for="answer-language-switch">Answer Language:</label>
+                        <select id="answer-language-switch" class="language-switch-select">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="zh">🇨🇳 Chinese</option>
+                            <option value="ko">🇰🇷 Korean</option>
+                            <option value="ja">🇯🇵 Japanese</option>
+                            <option value="es">🇪🇸 Spanish</option>
+                            <option value="vi">🇻🇳 Vietnamese</option>
+                            <option value="fr">🇫🇷 French</option>
+                            <option value="de">🇩🇪 German</option>
+                            <option value="tr">🇹🇷 Turkish</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="question-container">
+                    <div class="question-type"></div>
+                    <div class="chinese-text-container">
+                        <div class="chinese-text"></div>
+                        <button class="listen-btn" id="listen-btn" title="Listen to pronunciation">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="question-text"></div>
+                    <div class="options-container">
+                        <button class="option-btn" data-option="0"></button>
+                        <button class="option-btn" data-option="1"></button>
+                        <button class="option-btn" data-option="2"></button>
+                        <button class="option-btn" data-option="3"></button>
+                    </div>
+                    
+                    <div class="fill-blank-container hidden">
+                        <input type="text" id="fill-blank-input" class="fill-blank-input" placeholder="Type your answer here...">
+                    </div>
+                    <div class="answer-controls">
+                        <button id="action-btn" class="btn action-btn" disabled>Select an Answer</button>
+                    </div>
+                </div>
+                
+                <div id="feedback" class="feedback hidden">
+                    <div class="feedback-text"></div>
+                </div>
+            </div>
+            
+            <div id="result-screen" class="screen">
+                <h2>Quiz Complete!</h2>
+                <div id="score-display">
+                    <div class="score-circle">
+                        <span id="final-score">0</span>%
+                    </div>
+                </div>
+                <div id="score-message"></div>
+                <button id="restart-btn" class="btn primary">Try Again</button>
+            </div>
+            
+            <div id="history-screen" class="screen">
+                <h2>📚 Quiz History</h2>
+                <div id="history-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Quizzes:</span>
+                        <span id="total-quizzes">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Average Score:</span>
+                        <span id="avg-score">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Words Learned:</span>
+                        <span id="words-learned">0</span>
+                    </div>
+                </div>
+                <div class="history-filters">
+                    <button id="show-all-btn" class="btn filter-btn active">Show All</button>
+                    <button id="show-wrong-only-btn" class="btn filter-btn">Wrong Answers Only</button>
+                </div>
+                <div id="history-list"></div>
+                <div class="history-controls">
+                    <button id="clear-history-btn" class="btn secondary">Clear History</button>
+                    <button id="back-to-quiz-btn" class="btn primary">Back to Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
